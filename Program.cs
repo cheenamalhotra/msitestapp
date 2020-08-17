@@ -64,7 +64,7 @@ namespace MSITokenTest
                     Console.WriteLine(e.Message);
                 }
 
-                using (SqlConnection conn = new SqlConnection("Server=adotest.database.windows.net; Database=Northwind; Pooling=No; Persist Security Info=true;"))
+                using (SqlConnection conn = new SqlConnection("Server=sqlegress.database.windows.net; Database=sqlegress1; Pooling=No; Persist Security Info=true;"))
                 {
                     conn.AccessToken = accessToken;
                     //Console.WriteLine(conn.AccessToken);
