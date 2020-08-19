@@ -13,8 +13,17 @@ namespace MSITokenTest
 {
     class Program
     {
+        /// <summary>
+        /// Runs test application with connection string in argument.
+        /// </summary>
+        /// <param name="args">args[0] Connection string</param>
         static void Main(string[] args)
         {
+            if(args.Length < 1)
+            {
+                throw new ArgumentException("Please provide connection string in argument.")
+            }
+
             string accessToken = null;
             string expiry = "expires_on";
 
@@ -64,10 +73,9 @@ namespace MSITokenTest
                     Console.WriteLine(e.Message);
                 }
 
-                using (SqlConnection conn = new SqlConnection("Server=sqlegress.database.windows.net; Database=sqlegress1; Pooling=No; Persist Security Info=true;"))
+                using (SqlConnection conn = new SqlConnection(args[0]))
                 {
                     conn.AccessToken = accessToken;
-                    //Console.WriteLine(conn.AccessToken);
                     conn.Open();
                     Console.WriteLine(DateTime.UtcNow + " | Pooling: no | " + "Connected");
                     using (SqlCommand cmd = conn.CreateCommand())

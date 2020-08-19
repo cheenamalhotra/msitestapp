@@ -8,7 +8,7 @@ WORKDIR /MSITokenTest
 COPY . .
 
 WORKDIR /MSITokenTest
-RUN dotnet build "MSITokenTest.csproj" -c Release -o /app/build 
+RUN dotnet build "MSITokenTest.csproj" -c Release -o /app/build
 
 FROM build AS publish
 RUN dotnet publish "MSITokenTest.csproj" -c Release -o /app/publish
@@ -16,4 +16,4 @@ RUN dotnet publish "MSITokenTest.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "MSITokenTest.dll"]
+ENTRYPOINT ["dotnet", "MSITokenTest.dll", "Server=mydb.database.windows.net;Initial Catalog=testdb;"]
