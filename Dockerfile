@@ -16,4 +16,4 @@ RUN dotnet publish "MSITokenTest.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "MSITokenTest.dll", "Server=mydb.database.windows.net;Initial Catalog=testdb;"]
+ENTRYPOINT ["dotnet", "MSITokenTest.dll"]

@@ -15,15 +15,12 @@ namespace MSITokenTest
     {
         /// <summary>
         /// Runs test application with connection string in argument.
+        /// Requires Environment variable "MSI_TEST_CONN_STRING" to contain connection string.
         /// </summary>
-        /// <param name="args">args[0] Connection string</param>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
-            if(args.Length < 1)
-            {
-                throw new ArgumentException("Please provide connection string in argument.")
-            }
-
+            string conenctionString = Environment.GetEnvironmentVariable("MSI_TEST_CONN_STRING");
             string accessToken = null;
             string expiry = "expires_on";
 
@@ -73,7 +70,7 @@ namespace MSITokenTest
                     Console.WriteLine(e.Message);
                 }
 
-                using (SqlConnection conn = new SqlConnection(args[0]))
+                using (SqlConnection conn = new SqlConnection(conenctionString))
                 {
                     conn.AccessToken = accessToken;
                     conn.Open();
